@@ -62,3 +62,14 @@ class OrderViewSet(viewsets.ViewSet):
             queryset = Order.objects.all()
             serializer = OrderSerializer(queryset, many=True)
             return Response(serializer.data)
+
+
+class ProductViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing or retrieving users.
+    """
+
+    def list(self, request):
+        queryset = Product.objects.all()
+        serializer = ProductSerializer(queryset, many=True)
+        return Response(serializer.data)
