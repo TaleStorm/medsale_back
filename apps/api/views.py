@@ -53,11 +53,12 @@ class GetUserOrProductOrOrder(generics.RetrieveAPIView):
         return QueryToModelOrSerializer().get_serializer(model)
 
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+class OrderViewSet(viewsets.ViewSet):
+        """
+        A simple ViewSet for listing or retrieving users.
+        """
 
-    def get_queryset(self):
-        user_id = self.request.query_params.get('user_id')
-        if user_id:
-            return Order.objects.filter(user_id=user_id)
+        def list(self, request):
+            queryset = Order.objects.all()
+            serializer = OrderSerializer(queryset, many=True)
+            return Response(serializer.data)
