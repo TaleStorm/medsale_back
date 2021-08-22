@@ -5,7 +5,7 @@ from user.models import User
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user_id = models.OneToOneField(
+    user_id = models.ForeignKey(
         User,
         on_delete=models.CASCADE
     )
