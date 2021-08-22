@@ -5,6 +5,7 @@ from user.models import User
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    numbers = models.IntegerField(unique=True, default=1)
     user_id = models.ForeignKey(
         User,
         on_delete=models.CASCADE

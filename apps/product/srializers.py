@@ -4,6 +4,8 @@ from .models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    _id = serializers.UUIDField(source='id')
+
     class Meta:
         model = Product
-        fields = '__all__'
+        exclude = ('id',)

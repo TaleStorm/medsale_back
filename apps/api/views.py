@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.response import Response
 from order.models import Order
 from product.models import Product
 from user.models import User
@@ -27,7 +28,8 @@ class GetUserOrProductOrOrder(generics.RetrieveAPIView):
 
         queryset = self.filter_queryset(self.get_queryset())
 
-        lookup_url_kwarg = self.request.query_params.get('id')
+        lookup_url_kwarg = self.request.query_params.get('id', None)
+        #lookup_user_id = self.request.query_params.get('user_id', None)
 
         filter_kwargs = {self.lookup_field: lookup_url_kwarg}
         obj = get_object_or_404(queryset, **filter_kwargs)
